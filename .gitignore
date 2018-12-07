@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/TestProgram
+/packages/EntityFramework.6.2.0
+/TestProgramDataLayer/bin/Debug
+/TestProgramDataLayer/obj/Debug
+/TestProgramLogic/bin
+/TestProgramLogic/obj
+/TestProgramWinForms/bin
+/TestProgramWinForms/obj
