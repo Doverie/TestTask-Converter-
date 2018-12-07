@@ -31,8 +31,8 @@ namespace TestProgramLogic
 
         private string FullPathWsFileExtension(string path, string name)
         {
-            string nameWsExtension = String.Concat(name+ ".tck");
-            string fullPath = Path.Combine(path,nameWsExtension);
+            string nameWsExtension = String.Concat(name + ".tck");
+            string fullPath = Path.Combine(path, nameWsExtension);
             return fullPath;
         }
 
@@ -53,7 +53,6 @@ namespace TestProgramLogic
                         sw.WriteLine(newLine);
                     }
                 }
-                
             }
             File.Delete(oldPath);
         }

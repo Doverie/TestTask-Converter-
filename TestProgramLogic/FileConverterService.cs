@@ -59,8 +59,7 @@ namespace TestProgramLogic
                         repo.AddSourceFileModelToDB(sourceFileModel);
 
                         string newFileName = converter.FileNameConverter(file);
-                        //newFilesNames.Add(newFileName);
-
+                       
                         string newPath = converter.CreateNewFolder(brokerTargetPath, file);
                         DateTime fileDate = converter.ConvertToDateTime(file);
                         string currCode = (string.Join("", file.ToCharArray().Where(char.IsLetter)));
@@ -69,9 +68,6 @@ namespace TestProgramLogic
                         {
                             FileName = newFileName, NewFolder = newPath, BrokerId = brokerId, FileDate = fileDate
                         };
-
-                        
-                        //repo.AddTargetFileModelToDB(targetFileModel);
                         converter.FileInformationConverter(folderPath, newPath, currCode, file, newFileName);
                         targetFilesModels.Add(targetFileModel);
                     }
