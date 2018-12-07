@@ -50,7 +50,7 @@ namespace TestProgramLogic
                     
                     foreach (var file in files)
                     {
-                        var sourceFileModel = new TestProgramDataLayer.DbModel.SourceFiles
+                        var sourceFileModel = new TestProgramDataLayer.DbModel.SourceFile
                         {
                             Name = file,
                             OldFilePath = folderPath,

@@ -1,6 +1,6 @@
 ﻿namespace TestProgramWinForms
 {
-    partial class Form1
+    partial class WinFormUI
     {
         /// <summary>
         /// Required designer variable.
@@ -33,8 +33,7 @@
             this.sourcePath = new System.Windows.Forms.TextBox();
             this.targetPath = new System.Windows.Forms.TextBox();
             this.ButtonStart = new System.Windows.Forms.Button();
-            this.errorMessage = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.ErrorMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ButtonSourcePath
@@ -82,37 +81,27 @@
             this.ButtonStart.UseVisualStyleBackColor = true;
             this.ButtonStart.Click += new System.EventHandler(this.ButtonStart_Click);
             // 
-            // errorMessage
+            // ErrorMessage
             // 
-            this.errorMessage.Location = new System.Drawing.Point(134, 122);
-            this.errorMessage.Name = "errorMessage";
-            this.errorMessage.Size = new System.Drawing.Size(200, 20);
-            this.errorMessage.TabIndex = 5;
-            this.errorMessage.Text = "Press Start when select folders";
+            this.ErrorMessage.AutoSize = true;
+            this.ErrorMessage.Location = new System.Drawing.Point(134, 126);
+            this.ErrorMessage.Name = "ErrorMessage";
+            this.ErrorMessage.Size = new System.Drawing.Size(147, 13);
+            this.ErrorMessage.TabIndex = 6;
+            this.ErrorMessage.Text = "Press Start after select folders";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(135, 146);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // Form1
+            // WinFormUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 171);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.errorMessage);
+            this.Controls.Add(this.ErrorMessage);
             this.Controls.Add(this.ButtonStart);
             this.Controls.Add(this.targetPath);
             this.Controls.Add(this.sourcePath);
             this.Controls.Add(this.ButtonTargetPath);
             this.Controls.Add(this.ButtonSourcePath);
-            this.Name = "Form1";
+            this.Name = "WinFormUI";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -126,8 +115,7 @@
         private System.Windows.Forms.TextBox sourcePath;
         private System.Windows.Forms.TextBox targetPath;
         private System.Windows.Forms.Button ButtonStart;
-        private System.Windows.Forms.TextBox errorMessage;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ErrorMessage;
     }
 }
 

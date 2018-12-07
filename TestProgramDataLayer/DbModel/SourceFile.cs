@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TestProgramDataLayer.DbModel
 {
-    public class SourceFiles
+    public class SourceFile
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,9 +19,10 @@ namespace TestProgramDataLayer.DbModel
         public string OldFilePath { get; set; }
         [Required]
         public string Name { get; set; }
-        
+
         [ForeignKey("BrokerId")]
         public Broker Brokers { get; set; }
 
     }
 }
+

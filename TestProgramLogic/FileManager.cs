@@ -49,8 +49,7 @@ namespace TestProgramLogic
                     {
                         string[] lineParams = line.Split(';');
                         DateTime time = ConvertToDateTime(lineParams[0]);
-                        string newLine = String.Concat(currCode, ",", time.Year, time.Month, time.Day, ","
-                            , time.Hour, time.Minute, time.Second, lineParams[1], ",", lineParams[2]);
+                        string newLine = String.Concat(currCode, ",", time.ToString("yyyyMMdd,HHmmss"), lineParams[1], ",", lineParams[2]);
                         sw.WriteLine(newLine);
                     }
                 }
@@ -62,7 +61,7 @@ namespace TestProgramLogic
         public string CreateNewFolder(string brokerPath, string fileName)
         {
             DateTime time = ConvertToDateTime(fileName);
-            string newPath = Path.Combine(brokerPath, time.Year.ToString(), time.Month.ToString());
+            string newPath = Path.Combine(brokerPath, time.ToString("yyyyMM"));
             System.IO.Directory.CreateDirectory(newPath);
             return newPath;
         }

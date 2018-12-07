@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="DBContext.cs" />
     <Compile Include="DbModel\Broker.cs" />
-    <Compile Include="DbModel\SourceFolder.cs" />
+    <Compile Include="DbModel\SourceFile.cs" />
     <Compile Include="DbModel\TargetFile.cs" />
     <Compile Include="ModelsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

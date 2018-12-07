@@ -31,7 +31,7 @@ namespace TestProgramDataLayer
             }
         }
 
-        public void AddSourceFileModelToDB(SourceFiles souceFileModel)
+        public void AddSourceFileModelToDB(SourceFile souceFileModel)
         {
             using (DBContext context = new DBContext())
             {

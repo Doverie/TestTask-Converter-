@@ -16,6 +16,6 @@ namespace TestProgramDataLayer
 
         public DbSet<Broker> Broker { get; set; }
         public DbSet<TargetFile> TargetFile { get; set; }
-        public DbSet<SourceFiles> SourceFile { get; set; }
+        public DbSet<SourceFile> SourceFile { get; set; }
     }
 }

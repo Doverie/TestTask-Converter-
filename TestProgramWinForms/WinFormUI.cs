@@ -11,9 +11,9 @@ using TestProgramLogic;
 
 namespace TestProgramWinForms
 {
-    public partial class Form1 : Form
+    public partial class WinFormUI : Form
     {
-        public Form1()
+        public WinFormUI()
         {
             InitializeComponent();
         }
@@ -53,25 +53,20 @@ namespace TestProgramWinForms
             {
                 FileConverterService logic = new FileConverterService();
                 logic.FillModels(@sourcePath.Text, @targetPath.Text);
-                errorMessage.Text = "Successful";
+                ErrorMessage.Text = "Successful";
                 isIt = true;
             }
             catch (Exception ex)
             {
-                errorMessage.Text = "Something gone wrong";
+                ErrorMessage.Text = ex.Message;
             }
             finally
             {
                 if (!isIt)
                 {
-                    errorMessage.Text = "Something gone wrong";
+                    ErrorMessage.Text = "Something went wrong";
                 }
             }
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
-    }
 }
