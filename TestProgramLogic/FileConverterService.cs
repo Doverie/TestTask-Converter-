@@ -18,12 +18,13 @@ namespace TestProgramLogic
         public void FillModels(string sourcePathFormUser, string targetPathFormUser)
         {
             List<string> brokers = GetBrokersNames(sourcePathFormUser);
-            List<string> folders = new List<string>();
-            List<string> files = new List<string>();
+            
             FileManager converter = new FileManager();
 
             List<TestProgramDataLayer.DbModel.Broker> brokersModels = new List<TestProgramDataLayer.DbModel.Broker>();
             List<TestProgramDataLayer.DbModel.TargetFile> targetFilesModels = new List<TestProgramDataLayer.DbModel.TargetFile>();
+
+            var fileDict = new Dictionary<string, List<FileRow>>();
 
             ModelsRepository repo = new ModelsRepository();
 
@@ -31,25 +32,31 @@ namespace TestProgramLogic
 
             foreach (var broker in brokers)
             {
+                //add broker
                 var brokerSourcePath = Path.Combine(sourcePathFormUser, broker);
                 var brokerTargetPath = Path.Combine(targetPathFormUser, broker);
                 var brokerModel = new TestProgramDataLayer.DbModel.Broker
                 {
-                    Name = broker, NewBaseFolder = brokerTargetPath, OldBaseFolder = brokerSourcePath
+                    Name = broker,
+                    NewBaseFolder = brokerTargetPath,
+                    OldBaseFolder = brokerSourcePath
                 };
 
                 brokersModels.Add(brokerModel);
                 int brokerId = repo.AddBrokerModelToDB(brokerModel);
 
-                folders = GetFoldersInBrokerNames(brokerSourcePath);
+                //get all folder names in broker
+                List<string> folders = GetFoldersInBrokerNames(brokerSourcePath);
 
                 foreach (var folder in folders)
                 {
                     var folderPath = Path.Combine(brokerSourcePath, folder);
-                    files = GetFileNames(folderPath);
+                    //get all file names in folder
+                    List<string> files = GetFileNames(folderPath);
                     
                     foreach (var file in files)
                     {
+                        //add old file to db
                         var sourceFileModel = new TestProgramDataLayer.DbModel.SourceFile
                         {
                             Name = file,
@@ -58,22 +65,35 @@ namespace TestProgramLogic
                         };
                         repo.AddSourceFileModelToDB(sourceFileModel);
 
+                        //get all information about file
                         string newFileName = converter.FileNameConverter(file);
-                       
-                        string newPath = converter.CreateNewFolder(brokerTargetPath, file);
+                        
                         DateTime fileDate = converter.ConvertToDateTime(file);
+                        string newPath = Path.Combine(brokerTargetPath, fileDate.Year.ToString(), fileDate.Month.ToString());
+                        //converter.CreateNewFolder(brokerTargetPath, file);
                         string currCode = (string.Join("", file.ToCharArray().Where(char.IsLetter)));
 
-                        var targetFileModel = new TestProgramDataLayer.DbModel.TargetFile
+                        //fill dictionary
+                        if (!fileDict.ContainsKey(newFileName))
                         {
-                            FileName = newFileName, NewFolder = newPath, BrokerId = brokerId, FileDate = fileDate
-                        };
-                        converter.FileInformationConverter(folderPath, newPath, currCode, file, newFileName);
-                        targetFilesModels.Add(targetFileModel);
+                            fileDict.Add(newFileName, new List<FileRow>());
+
+                            var targetFileModel = new TestProgramDataLayer.DbModel.TargetFile
+                            {
+                                FileName = newFileName,
+                                NewFolder = newPath,
+                                BrokerId = brokerId,
+                                FileDate = fileDate
+                            };
+                            targetFilesModels.Add(targetFileModel);
+                        }
+                        fileDict[newFileName].AddRange(converter.GetFileConvertedRows(folderPath, currCode, file));
                     }
                 }
+                //creates new files in brokers folder
+                converter.RecordBrokerFiles(brokerTargetPath,fileDict);
             }
-
+            
             var orderedNewFiles = targetFilesModels.OrderBy(el => el.FileDate).ToList();
             repo.AddTargetFileModelsToDB(orderedNewFiles);
         }
